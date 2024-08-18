@@ -1,2 +1,47 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+  import NumberList from "../components/NumberList.svelte";
+  import RightPanel from "../components/RightPanel.svelte";
+</script>
+
+<h2 class="header">1-to-20</h2>
+
+<div id="app-wrapper">
+  <NumberList />
+  <RightPanel />
+</div>
+
+<footer>
+  built by <a href="https://fleetfoxx.dev/">fleetfoxx</a>
+</footer>
+
+<style>
+  :global(body) {
+    background: #181818;
+    color: #eeeeee;
+    font-family: "New Amsterdam", sans-serif;
+    font-size: 2rem;
+  }
+
+  :global(button) {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  #app-wrapper {
+    display: flex;
+    gap: 1rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .header {
+    text-align: center;
+  }
+
+  footer {
+    text-align: center;
+    padding: 5rem;
+    font-size: 1.5rem;
+  }
+</style>
