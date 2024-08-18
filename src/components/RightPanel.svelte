@@ -24,13 +24,13 @@
 </script>
 
 <div id="right-panel">
-  <div>
+  <div id="game-rules">
     <p>Sort 20 random numbers from 1 to 1000 without changing the order.</p>
     <p>Good luck!</p>
   </div>
   {#if gameStateValue === GameState.ValidMoves}
     {#if currentNumberValue === null}
-      <button on:click={handleStart} class="start-button large-font">Start!</button>
+      <button on:click={handleStart} class="start-button">Start!</button>
     {:else}
       <div class="current-number">
         <span class="label">Current Number</span>
@@ -66,6 +66,11 @@
     }
   }
 
+  #game-rules {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
   .start-button,
   .current-number {
     background: rgba(255, 255, 255, 0.3);
@@ -78,6 +83,7 @@
 
   .start-button {
     cursor: pointer;
+    font-size: 4rem;
 
     &:hover {
       background: rgba(255, 255, 255, 0.4);
@@ -100,6 +106,6 @@
   }
 
   .large-font {
-    font-size: 10rem;
+    font-size: 8rem;
   }
 </style>
