@@ -24,7 +24,10 @@
 </script>
 
 <div id="right-panel">
-  <div></div>
+  <div>
+    <p>Sort 20 random numbers from 1 to 1000 without changing the order.</p>
+    <p>Good luck!</p>
+  </div>
   {#if gameStateValue === GameState.ValidMoves}
     {#if currentNumberValue === null}
       <button on:click={handleStart} class="start-button large-font">Start!</button>
@@ -57,6 +60,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    & > * {
+      flex: 1;
+    }
   }
 
   .start-button,
