@@ -31,7 +31,8 @@ jobs:
 
       - name: build
         env:
-          VITE_API_URI: '${{ vars.VITE_API_URI }}'
+          # VITE_API_URI: '${{ vars.VITE_API_URI }}'
+          VITE_API_URI: 'https://one-to-twenty-server.fly.dev'
           BASE_PATH: '/${{ github.event.repository.name }}'
         run: |
           npm run build
