@@ -5,7 +5,6 @@ console.log(import.meta.env.VITE_API_URI);
 
 const getInitialSelections = () => new Array<number | null>(20).fill(null);
 
-// export const seed: Writable<string> = writable("");
 let seed = "";
 let rng = seedrandom();
 

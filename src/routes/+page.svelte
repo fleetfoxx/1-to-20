@@ -11,22 +11,10 @@
 </div>
 
 <footer>
-  built by <a href="https://fleetfoxx.dev/">fleetfoxx</a>
+  built by <a href="https://fleetfoxx.dev/">fleetfoxx</a> | <a href="/stats">Stats!</a>
 </footer>
 
 <style>
-  :global(body) {
-    background: #181818;
-    color: #eeeeee;
-    font-family: "New Amsterdam", sans-serif;
-    font-size: 2rem;
-  }
-
-  :global(button) {
-    font-family: inherit;
-    font-size: inherit;
-  }
-
   #app-wrapper {
     display: flex;
     gap: 1rem;
@@ -34,7 +22,7 @@
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .header {
     text-align: center;
   }
