@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { currentNumber, currentState, GameState, generateNextNumber, restart, selections } from "../store";
+  import { currentNumber, currentState, GameState, generateNextNumber, restart, selections, startGame } from "../store";
 
   let currentNumberValue: number | null;
   currentNumber.subscribe((value) => {
@@ -17,7 +17,7 @@
   });
 
   const handleStart = () => {
-    generateNextNumber();
+    startGame();
   };
 
   const handleNewGame = () => restart();

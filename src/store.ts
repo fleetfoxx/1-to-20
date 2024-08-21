@@ -1,6 +1,11 @@
 import { get, writable, type Writable } from "svelte/store";
+import seedrandom from "seedrandom";
 
 const getInitialSelections = () => new Array<number | null>(20).fill(null);
+
+// export const seed: Writable<string> = writable("");
+let seed = "";
+let rng = seedrandom();
 
 export const selections: Writable<(number | null)[]> = writable(getInitialSelections());
 
@@ -16,7 +21,14 @@ export const currentState: Writable<GameState> = writable(GameState.ValidMoves);
 
 export const availableMoves: Writable<number[]> = writable([]);
 
-const getRandomInt = () => Math.floor(Math.random() * (1000 - 1 + 1) + 1);
+const getRandomInt = () => Math.floor(rng() * (1000 - 1 + 1) + 1);
+
+export const startGame = () => {
+  seed = crypto.randomUUID();
+  rng = seedrandom(seed);
+  console.log(seed);
+  generateNextNumber();
+};
 
 export const generateNextNumber = () => {
   const selectionValues = get(selections);
@@ -73,6 +85,7 @@ export const generateNextNumber = () => {
 
     if (nextAvailableMoves.length === 0) {
       currentState.set(GameState.NoValidMoves);
+      sendResults();
     } else {
       currentState.set(GameState.ValidMoves);
       availableMoves.set(nextAvailableMoves);
@@ -91,6 +104,7 @@ export const setSelection = (index: number) => {
 
   if (selectionValues.every((v) => v !== null)) {
     currentState.set(GameState.Win);
+    sendResults();
   } else {
     generateNextNumber();
   }
@@ -100,4 +114,19 @@ export const restart = () => {
   selections.set(getInitialSelections());
   currentState.set(GameState.ValidMoves);
   currentNumber.set(null);
+};
+
+const sendResults = () => {
+  console.log(import.meta.env.VITE_API_URI);
+  fetch(`${import.meta.env.VITE_API_URI}/games`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      numbers: get(selections),
+      lastNumber: get(currentNumber),
+      seed
+    })
+  });
 };
