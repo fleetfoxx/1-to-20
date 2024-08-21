@@ -56,25 +56,33 @@
   onMount(() => fetchStats());
 </script>
 
-<a href={`${base}/`}>{"<"} Back to game</a>
+<div id="stats-page">
+  <a href={`${base}/`}>{"<"} Back to game</a>
 
-<h2>Stats</h2>
+  <h2>Stats</h2>
 
-{#if loading}
-  <p>Loading...</p>
-{:else if stats === null}
-  <p>Failed to fetch stats.</p>
-{:else}
-  <p>Number of games played: {stats.length}</p>
-  <p>Number of wins: {winCount}</p>
-{/if}
+  {#if loading}
+    <p>Loading...</p>
+  {:else if stats === null}
+    <p>Failed to fetch stats.</p>
+  {:else}
+    <p>Number of games played: {stats.length}</p>
+    <p>Number of wins: {winCount}</p>
+  {/if}
 
-<div class="chart-wrapper">
-  <canvas id="score-histogram"></canvas>
+  <div class="chart-wrapper">
+    <canvas id="score-histogram"></canvas>
+  </div>
 </div>
 
 <style>
+  #stats-page {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .chart-wrapper {
-    width: 95vw;
+    width: 100%;
   }
 </style>
