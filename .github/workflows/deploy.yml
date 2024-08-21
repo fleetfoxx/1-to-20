@@ -4,8 +4,8 @@ on:
   push:
     branches: 'main'
 
-env:
-  VITE_API_URI: ${{ vars.VITE_API_URI }}
+# env:
+#   VITE_API_URI: ${{ vars.VITE_API_URI }}
 
 jobs:
   build_site:
@@ -31,6 +31,7 @@ jobs:
 
       - name: build
         env:
+          VITE_API_URI: '${{ vars.VITE_API_URI }}'
           BASE_PATH: '/${{ github.event.repository.name }}'
         run: |
           npm run build
