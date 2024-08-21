@@ -1,6 +1,8 @@
 import { get, writable, type Writable } from "svelte/store";
 import seedrandom from "seedrandom";
 
+console.log(import.meta.env.VITE_API_URI);
+
 const getInitialSelections = () => new Array<number | null>(20).fill(null);
 
 // export const seed: Writable<string> = writable("");
@@ -117,7 +119,6 @@ export const restart = () => {
 };
 
 const sendResults = () => {
-  console.log(import.meta.env.VITE_API_URI);
   fetch(`${import.meta.env.VITE_API_URI}/games`, {
     method: "POST",
     headers: {

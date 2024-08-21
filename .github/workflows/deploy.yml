@@ -5,7 +5,7 @@ on:
     branches: 'main'
 
 env:
-  VITE_API_URI: ${{vars.VITE_API_URI}}
+  VITE_API_URI: ${{ vars.VITE_API_URI }}
 
 jobs:
   build_site:
