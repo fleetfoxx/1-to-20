@@ -35,14 +35,14 @@
       <div class="current-number">
         <span class="label">Current Number</span>
         <span class="large-font">{currentNumberValue}</span>
-        <button class="new-game" on:click={handleNewGame}>New game</button>
+        <button class="new-game" on:click={handleNewGame}>Restart</button>
       </div>
     {/if}
   {:else if gameStateValue === GameState.NoValidMoves}
     <div class="current-number">
       <span class="label">Current Number</span>
       <span class="large-font">{currentNumberValue}</span>
-      <span class="label">No valid moves!</span>
+      <span class="label red">No valid moves!</span>
       <button class="new-game" on:click={handleNewGame}>New game</button>
     </div>
   {:else if gameStateValue === GameState.Win}
@@ -107,5 +107,9 @@
 
   .large-font {
     font-size: 8rem;
+  }
+
+  .red {
+    color: rgb(255, 66, 66);
   }
 </style>
