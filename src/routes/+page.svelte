@@ -1,4 +1,5 @@
 <script>
+  import { base } from "$app/paths";
   import NumberList from "../components/NumberList.svelte";
   import RightPanel from "../components/RightPanel.svelte";
 </script>
@@ -11,7 +12,7 @@
 </div>
 
 <footer>
-  built by <a href="https://fleetfoxx.dev/">fleetfoxx</a> | <a href="/stats">Stats!</a>
+  built by <a href="https://fleetfoxx.dev/">fleetfoxx</a> | <a href={`${base}/stats`}>Stats!</a>
 </footer>
 
 <style>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { Chart } from "chart.js/auto";
+  import { base } from "$app/paths";
 
   type Stats = {
     numbers: string;
@@ -10,6 +11,7 @@
   };
 
   let stats: Stats[] | null = [];
+  $: winCount = stats?.filter((s) => JSON.parse(s.numbers).filter((n: number) => n !== null).length === 20).length ?? 0;
   let loading = false;
 
   const buildCharts = (stats: Stats[]) => {
@@ -54,9 +56,9 @@
   onMount(() => fetchStats());
 </script>
 
-<h2>Stats</h2>
+<a href={`${base}/`}>{"<"} Back to game</a>
 
-<a href="/">{"<"} Back to game</a>
+<h2>Stats</h2>
 
 {#if loading}
   <p>Loading...</p>
@@ -64,6 +66,7 @@
   <p>Failed to fetch stats.</p>
 {:else}
   <p>Number of games played: {stats.length}</p>
+  <p>Number of wins: {winCount}</p>
 {/if}
 
 <div class="chart-wrapper">
@@ -72,7 +75,6 @@
 
 <style>
   .chart-wrapper {
-    width: 800px;
-    height: 600px;
+    width: 95vw;
   }
 </style>
