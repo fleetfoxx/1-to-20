@@ -4,23 +4,16 @@
   import { base } from "$app/paths";
 
   type Stats = {
-    numbers: string;
-    lastNumber: number;
-    seed: string;
-    timestamp: number;
+    gamesPlayed: number;
+    wins: number;
+    data: [number, number][];
   };
 
-  let stats: Stats[] | null = [];
-  $: winCount = stats?.filter((s) => JSON.parse(s.numbers).filter((n: number) => n !== null).length === 20).length ?? 0;
+  let stats: Stats | null = null;
   let loading = false;
 
-  const buildCharts = (stats: Stats[]) => {
-    const scoreHistogram = new Map<number, number>(new Array(20).fill(0).map((v, i) => [i + 1, v]));
-
-    for (const stat of stats) {
-      const score = JSON.parse(stat.numbers).filter((n: number | null) => n !== null).length;
-      scoreHistogram.set(score, scoreHistogram.has(score) ? scoreHistogram.get(score)! + 1 : 1);
-    }
+  const buildCharts = (stats: Stats) => {
+    const scoreHistogram = new Map<number, number>(stats.data);
 
     new Chart(document.getElementById("score-histogram") as HTMLCanvasElement, {
       type: "bar",
@@ -40,7 +33,7 @@
     loading = true;
 
     try {
-      const response = await fetch("https://one-to-twenty-server.fly.dev/games");
+      const response = await fetch("https://one-to-twenty-server.fly.dev/stats");
 
       if (!response.ok) {
         stats = null;
@@ -66,8 +59,8 @@
   {:else if stats === null}
     <p>Failed to fetch stats.</p>
   {:else}
-    <p>Number of games played: {stats.length}</p>
-    <p>Number of wins: {winCount}</p>
+    <p>Number of games played: {stats.gamesPlayed}</p>
+    <p>Number of wins: {stats.wins}</p>
   {/if}
 
   <div class="chart-wrapper">
